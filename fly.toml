@@ -1,0 +1,29 @@
+# fly.toml app configuration file generated for rust-server-by-ian on 2023-08-31T17:27:59-07:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "rust-server-by-ian"
+primary_region = "lax"
+kill_signal = "SIGINT"
+kill_timeout = "5s"
+
+[build]
+
+[[services]]
+  protocol = "tcp"
+  internal_port = 8080
+  processes = ["app"]
+
+  [[services.ports]]
+    port = 80
+    handlers = ["http"]
+    force_https = true
+
+  [[services.ports]]
+    port = 443
+    handlers = ["tls", "http"]
+  [services.concurrency]
+    type = "connections"
+    hard_limit = 25
+    soft_limit = 20
