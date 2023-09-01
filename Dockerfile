@@ -14,4 +14,4 @@ RUN cargo build --release
 EXPOSE 8080
 
 # Command to run your application.
-CMD ["cargo run"]
+CMD ["./target/release/rust-app"]
